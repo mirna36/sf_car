@@ -2,6 +2,26 @@ controllers:
     resource: ../src/Controller/
     type: annotation
 
+admin_car_list:
+  path: admin/cars
+  controller: App\Controller\Admin\CarController::carList
+
+admin_car_show:
+  path: admin/car/{id}
+  controller: App\Controller\Admin\CarController::carShow
+
+update_car:
+  path: admin/update/car/{id}
+  controller: App\Controller\Admin\CarController::carUpdate
+
+create_car:
+  path: admin/create/car
+  controller: App\Controller\Admin\CarController::createCar
+
+delete_car:
+  path: admin/delete/car/{id}
+  controller: App\Controller\Admin\CarController::deletCar
+
 kernel:
     resource: ../src/Kernel.php
     type: annotation
