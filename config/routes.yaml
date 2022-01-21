@@ -20,7 +20,47 @@ create_car:
 
 delete_car:
   path: admin/delete/car/{id}
-  controller: App\Controller\Admin\CarController::deletCar
+  controller: App\Controller\Admin\CarController::deleteCar
+
+  admin_brand_list:
+  path: admin/brands
+  controller: App\Controller\Admin\BrandController::brandList
+
+admin_brand_show:
+  path: admin/brand/{id}
+  controller: App\Controller\Admin\BrandController::brandShow
+
+update_brand:
+  path: admin/update/brand/{id}
+  controller: App\Controller\Admin\BrandController::brandUpdate
+
+create_brand:
+  path: admin/create/brand
+  controller: App\Controller\Admin\BrandController::createBrand
+
+delete_brand:
+  path: admin/delete/brand/{id}
+  controller: App\Controller\Admin\BrandController::deleteBrand
+
+  admin_group_list:
+  path: admin/groups
+  controller: App\Controller\Admin\GroupController::groupList
+
+admin_group_show:
+  path: admin/group/{id}
+  controller: App\Controller\Admin\GroupController::groupShow
+
+update_group:
+  path: admin/update/group/{id}
+  controller: App\Controller\Admin\GroupController::groupUpdate
+
+create_group:
+  path: admin/create/group
+  controller: App\Controller\Admin\GroupController::createCar
+
+delete_group:
+  path: admin/delete/group/{id}
+  controller: App\Controller\Admin\CarController::deleteGroup
 
 kernel:
     resource: ../src/Kernel.php

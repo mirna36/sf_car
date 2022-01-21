@@ -2,12 +2,11 @@
 
 {% block body %}
     {{ parent() }}
-
-    <h1>Créer une voiture</h1>
-
-	{{form(carForm)}}
+    <main class="container">
+        <h1 class="nosVoiture">Créer un compte</h1>
+	{{form(userForm)}}
     
-  </main>
+   </main>
     {% block javascripts %}{% endblock %}      
 
 {% endblock %}

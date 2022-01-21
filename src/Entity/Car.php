@@ -35,13 +35,17 @@ class Car
     #[ORM\JoinColumn(nullable: false)]
     private $groupe;
 
-    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class, orphanRemoval: true)]
-    private $images;
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class)]
+    private $image;
 
     public function __construct()
     {
-        $this->images = new ArrayCollection();
+        $this->image = new ArrayCollection();
     }
+
+    
+
+    
 
     public function getId(): ?int
     {
@@ -123,15 +127,15 @@ class Car
     /**
      * @return Collection|Image[]
      */
-    public function getImages(): Collection
+    public function getImage(): Collection
     {
-        return $this->images;
+        return $this->image;
     }
 
     public function addImage(Image $image): self
     {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
+        if (!$this->image->contains($image)) {
+            $this->image[] = $image;
             $image->setCar($this);
         }
 
@@ -140,7 +144,7 @@ class Car
 
     public function removeImage(Image $image): self
     {
-        if ($this->images->removeElement($image)) {
+        if ($this->image->removeElement($image)) {
             // set the owning side to null (unless already changed)
             if ($image->getCar() === $this) {
                 $image->setCar(null);
@@ -149,4 +153,8 @@ class Car
 
         return $this;
     }
+
+    
+
+    
 }

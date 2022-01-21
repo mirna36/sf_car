@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Car;
 
 use App\Form\CarType;
+
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,7 +74,7 @@ class CarController extends AbstractController
         return $this->render("admin/carForm.html.twig", ['carForm' => $carForm->createView()]);
     }
 
-    public function deletetCar(
+    public function deleteCar(
         $id,
         EntityManagerInterface $entityManagerInterface,
         CarRepository $carRepository

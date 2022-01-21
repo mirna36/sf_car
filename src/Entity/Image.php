@@ -22,9 +22,11 @@ class Image
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    #[ORM\ManyToOne(targetEntity: Car::class, inversedBy: 'images')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Car::class, inversedBy: 'image')]
+    
     private $car;
+
+   
 
     public function getId(): ?int
     {
@@ -78,4 +80,6 @@ class Image
 
         return $this;
     }
+
+    
 }
