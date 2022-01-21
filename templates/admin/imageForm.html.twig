@@ -1,0 +1,35 @@
+{% extends "admin/base.html.twig" %}
+
+{% block body %}
+    {{ parent() }}
+
+   <main class="container">
+    <h1>Télécharger une image</h1>
+
+
+
+		{{ form_start(imageForm) }}
+		<div class="mb-3">
+			{{ form_label(imageForm.src, 'Source : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(imageForm.src, {'attr' : {'placeholder' : 'src' , 'class' : 'form-control'} } ) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(imageForm.alt, 'Alt : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(imageForm.alt, {'attr' : {'placeholder' : 'alt', 'class' : 'form-control'} } ) }}
+		</div>
+    <div class="mb-3">
+			{{ form_label(imageForm.title, 'Titre : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(imageForm.title, {'attr' : {'placeholder' : 'title', 'class' : 'form-control'} } ) }}
+		</div>
+    <div class="mb-3">
+			{{ form_label(imageForm.car, 'Voiture : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(imageForm.car, {'attr' : {'placeholder' : 'car', 'class' : 'form-control'} } ) }}
+		</div>
+		
+		{{ form_end(imageForm) }}
+
+    
+  </main>
+    {% block javascripts %}{% endblock %}      
+
+{% endblock %}

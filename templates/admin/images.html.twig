@@ -1,0 +1,16 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    
+    <main class="container">
+
+{% for image in images %}
+		<h2>{{ image.title }}</h2>
+		<img src="{{ asset("/images" ~ image.src) }}" alt="{{ image.alt }}">
+	{% endfor %}
+
+     </main>
+    {% block javascripts %}{% endblock %}      
+
+{% endblock %}

@@ -1,14 +1,14 @@
 controllers:
-    resource: ../src/Controller/
-    type: annotation
+  resource: ../src/Controller/
+  type: annotation
 
-admin_car_list:
-  path: admin/cars
-  controller: App\Controller\Admin\CarController::carList
+front_car_list:
+  path: front/cars
+  controller: App\Controller\Front\CarController::carList
 
-admin_car_show:
-  path: admin/car/{id}
-  controller: App\Controller\Admin\CarController::carShow
+front_car_show:
+  path: front/car/{id}
+  controller: App\Controller\Front\CarController::carShow
 
 update_car:
   path: admin/update/car/{id}
@@ -22,46 +22,56 @@ delete_car:
   path: admin/delete/car/{id}
   controller: App\Controller\Admin\CarController::deleteCar
 
-  admin_brand_list:
-  path: admin/brands
-  controller: App\Controller\Admin\BrandController::brandList
+front_search:
+  path: search
+  controller: App\Controller\Front\CarController::frontSearch
 
-admin_brand_show:
-  path: admin/brand/{id}
-  controller: App\Controller\Admin\BrandController::brandShow
+front_brand_list:
+  path: front/brands
+  controller: App\Controller\Front\BrandController::brandList 
+
+front_brand_show:
+  path: front/brand
+  controller: App\Controller\Front\BrandController::brandShow 
+
+create_brand:
+  path: admin/create/brand
+  controller: App\Controller\Admin\BrandController::createBrand 
 
 update_brand:
   path: admin/update/brand/{id}
   controller: App\Controller\Admin\BrandController::brandUpdate
 
-create_brand:
-  path: admin/create/brand
-  controller: App\Controller\Admin\BrandController::createBrand
-
 delete_brand:
   path: admin/delete/brand/{id}
-  controller: App\Controller\Admin\BrandController::deleteBrand
+  controller: App\Controller\Admin\BrandController::deleteGoup  
 
-  admin_group_list:
-  path: admin/groups
-  controller: App\Controller\Admin\GroupController::groupList
+front_group_list:
+  path: front/groups
+  controller: App\Controller\Front\GroupController::groupList 
 
-admin_group_show:
-  path: admin/group/{id}
-  controller: App\Controller\Admin\GroupController::groupShow
-
-update_group:
-  path: admin/update/group/{id}
-  controller: App\Controller\Admin\GroupController::groupUpdate
+front_group_show:
+  path: front/group
+  controller: App\Controller\Front\GroupController::groupShow 
 
 create_group:
   path: admin/create/group
-  controller: App\Controller\Admin\GroupController::createCar
+  controller: App\Controller\Admin\GroupController::createGroup
+
+update_group:
+  path: admin/update/group/{id}
+  controller: App\Controller\Admin\GroupController::groupUpdate 
 
 delete_group:
   path: admin/delete/group/{id}
-  controller: App\Controller\Admin\CarController::deleteGroup
+  controller: App\Controller\Admin\GroupController::deleteGroup
+
+create_image:
+  path: admin/create/image
+  controller: App\Controller\Admin\ImageController::createImage
+
+
 
 kernel:
-    resource: ../src/Kernel.php
-    type: annotation
+  resource: ../src/Kernel.php
+  type: annotation

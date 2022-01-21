@@ -15,20 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BrandController extends AbstractController
 {
 
-    public function brandList(BrandRepository $brandRepository)
-    {
-        $brands = $brandRepository->findAll();
-
-        return $this->render("admin/brands.html.twig", ['brands' => $brands]);
-    }
-
-    public function brandShow($id, BrandRepository $brandRepository)
-    {
-        $brand = $brandRepository->find($id);
-
-        return $this->render("admin/brand.html.twig", ['brand' => $brand]);
-    }
-
+    
     public function brandUpdate(
         $id,
         BrandRepository $brandRepository,

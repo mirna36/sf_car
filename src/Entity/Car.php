@@ -28,11 +28,11 @@ class Car
     private $description;
 
     #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'cars')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $brand;
 
     #[ORM\ManyToOne(targetEntity: Group::class, inversedBy: 'cars')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $groupe;
 
     #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class)]
@@ -43,9 +43,9 @@ class Car
         $this->image = new ArrayCollection();
     }
 
-    
 
-    
+
+
 
     public function getId(): ?int
     {
@@ -153,8 +153,4 @@ class Car
 
         return $this;
     }
-
-    
-
-    
 }

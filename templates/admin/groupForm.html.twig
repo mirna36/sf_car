@@ -3,9 +3,23 @@
 {% block body %}
     {{ parent() }}
 
-    <h1>Créer un brand</h1>
+   <main class="container">
+    <h1>Créer un groupe</h1>
 
-	{{form(brandForm)}}
+
+
+		{{ form_start(groupForm) }}
+		<div class="mb-3">
+			{{ form_label(groupForm.name, 'Nom groupe : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(groupForm.name, {'attr' : {'placeholder' : 'Nom groupe' , 'class' : 'form-control'} } ) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(groupForm.countrie, 'Pays : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(groupForm.countrie, {'attr' : {'placeholder' : 'Pays', 'class' : 'form-control'} } ) }}
+		</div>
+		
+		{{ form_end(groupForm) }}
+
     
   </main>
     {% block javascripts %}{% endblock %}      

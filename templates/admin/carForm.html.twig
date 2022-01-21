@@ -1,13 +1,42 @@
 {% extends "admin/base.html.twig" %}
 
 {% block body %}
-    {{ parent() }}
+	{{ parent() }}
+	<main class="container">
 
-    <h1>Créer une voiture</h1>
+		<h1>Créer une voiture</h1>
 
-	{{form(carForm)}}
-    
-  </main>
-    {% block javascripts %}{% endblock %}      
+
+		{{ form_start(carForm) }}
+		<div class="mb-3">
+			{{ form_label(carForm.name, 'Nom  : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(carForm.name, {'attr' : {'placeholder' : 'Nom ' , 'class' : 'form-control'} } ) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(carForm.year, 'Année : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(carForm.year, {'attr' : {'placeholder' : 'Année', 'class' : 'form-control'} } ) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(carForm.engine, 'Engine : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(carForm.engine, {'attr' : {'placeholder' : 'Engine', 'class' : 'form-control'} } ) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(carForm.description, 'Description : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(carForm.description, {'attr' : {'placeholder' : 'Description', 'class' : 'form-control'} } ) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(carForm.brand, 'Marque : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(carForm.brand, {'attr' : {'placeholder' : 'Marque', 'class' : 'form-control'} } ) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(carForm.groupe, 'Groupe : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(carForm.groupe, {'attr' : {'placeholder' : 'Groupe', 'class' : 'form-control'} } ) }}
+		</div>
+
+
+		{{ form_end(carForm) }}
+
+	</main>
+	{% block javascripts %}{% endblock %}
 
 {% endblock %}

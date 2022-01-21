@@ -22,9 +22,12 @@ class AppFixtures extends Fixture
     private $imageRepository;
 
 
-    public function __construct(CarRepository $carRepository, BrandRepository $brandRepository, 
-    GroupRepository $groupRepository,  ImageRepository $imageRepository )
-    {
+    public function __construct(
+        CarRepository $carRepository,
+        BrandRepository $brandRepository,
+        GroupRepository $groupRepository,
+        ImageRepository $imageRepository
+    ) {
         $this->carRepository = $carRepository;
         $this->brandRepository = $brandRepository;
         $this->groupRepository = $groupRepository;
@@ -56,48 +59,29 @@ class AppFixtures extends Fixture
 
             $manager->flush();
         }
-      
+
         for ($i = 0; $i < 11; $i++) {
-            
+
             $car = new Car();
-            
-            $id_brand = rand(111, 121);
-            $id_group = rand(111, 121);
+
+            $id_brand = rand(408, 418);
+            $id_group = rand(408, 418);
 
             $brand = $this->brandRepository->find($id_brand);
             $group = $this->groupRepository->find($id_group);
-            $car->setBrand($faker->$brand);
-            $car->setGroupe($faker->$group);
+
+            $car->setBrand($brand);
+            $car->setGroupe($group);
             $car->setName($faker->word);
-            $car->setYear($faker->year($max = "now"));
+            $car->setYear($faker->numberBetween(1990, 2021));
             $car->setEngine($faker->word);
             $car->setDescription($faker->text);
-            
-            
+
+
 
             $manager->persist($car);
-
-            $manager->flush();
         }
 
-        for ($i = 0; $i < 11; $i++) {
-            $image  = new Image();
-            $car_id   = rand(1, 10);
-            $car = $this->groupRepository->find($car_id );
-          
-            $width = 640;
-            $height = 480;
-
-            $image->setSrc($faker->image($width,$height,'cats'));
-            $image->setAlt($faker->word);
-            $image->setCar($car);
-
-            $manager->persist($image);
-
-            $manager->flush();
-            
-        }
-
-        
+        $manager->flush();
     }
 }

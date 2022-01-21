@@ -2,10 +2,23 @@
 
 {% block body %}
     {{ parent() }}
-
+  <main class="container">
     <h1>Créer un brand</h1>
 
-	{{form(brandForm)}}
+
+
+		{{ form_start(brandForm) }}
+		<div class="mb-3">
+			{{ form_label(brandForm.name, 'Nom marque : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(brandForm.name, {'attr' : {'placeholder' : 'Nom marque' , 'class' : 'form-control'} } ) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(brandForm.countrie, 'Pays : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(brandForm.countrie, {'attr' : {'placeholder' : 'Pays', 'class' : 'form-control'} } ) }}
+		</div>
+		
+		{{ form_end(brandForm) }}
+
     
   </main>
     {% block javascripts %}{% endblock %}      

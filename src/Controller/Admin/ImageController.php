@@ -16,18 +16,63 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ImageController extends AbstractController
 {
 
-    /**
-     * @Route("admin/create/media", name="admin_create_media")
-     */
-    public function createMedia(
+    
+    public function createImage(
         Request $request,
-        EntityManagerInterface $entityManagerInterface,
-        SluggerInterface $sluggerInterface
+        SluggerInterface $sluggerInterface,
+        EntityManagerInterface $entityManagerInterface
     ) {
-
         $image = new Image();
 
-        $imageForm = $this->createForm(FormType::class, $image);
+        $imageForm = $this->createForm(ImageType::class, $image);
+
+        $imageForm->handleRequest($request);
+
+        if ($imageForm->isSubmitted() && $imageForm->isValid()) {
+
+            $imageFile = $imageForm->get('src')->getData();
+            
+            
+
+            if ($imageFile) {
+
+               
+                $originalFileName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                
+                $safeFileName = $sluggerInterface->slug($originalFileName);
+                $extension = pathinfo($imageFile->getClientOriginalName(), PATHINFO_EXTENSION);
+                
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $extension;
+                
+
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFileName
+                );
+
+                $image->setSrc($newFileName);
+            }
+
+            $entityManagerInterface->persist($image);
+            $entityManagerInterface->flush();
+
+            return $this->redirectToRoute('front_car_list');
+        }
+
+        return $this->render("admin/imageform.html.twig", ['imageForm' => $imageForm->createView()]);
+    }
+
+    public function updateImage(
+        $id,
+        Request $request,
+        SluggerInterface $sluggerInterface,
+        EntityManagerInterface $entityManagerInterface,
+        ImageRepository $imageRepository
+    ) {
+
+        $image = $imageRepository->find($id);
+
+        $imageForm = $this->createForm(ImageType::class, $image);
 
         $imageForm->handleRequest($request);
 
@@ -36,34 +81,57 @@ class ImageController extends AbstractController
             $imageFile = $imageForm->get('src')->getData();
 
             if ($imageFile) {
-                // On créé un nom unique avec le nom original de l'image pour éviter
-                // tout problème
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // on utilise slug sur le nom original de l'image pour avoir un nom valide
-                $safeFilename = $sluggerInterface->slug($originalFilename);
-                // on ajoute un id unique au nom de l'image
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
 
-                // On déplace le fichier dans le dossier public/media
-                // la destination du fichier est enregistré dans 'images_directory'
-                // qui est défini dans le fichier config\services.yaml
+                $originalFileName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $safeFileName = $sluggerInterface->slug($originalFileName);
+
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
                 $imageFile->move(
                     $this->getParameter('images_directory'),
-                    $newFilename
+                    $newFileName
                 );
 
-                $image->setSrc($newFilename);
+                $image->setSrc($newFileName);
             }
-
-            $image->setAlt($imageForm->get('title')->getData());
 
             $entityManagerInterface->persist($image);
             $entityManagerInterface->flush();
 
-            return $this->redirectToRoute("admin_car_list");
+            return $this->redirectToRoute('front_car_list');
         }
 
-        return $this->render('admin/imageform.html.twig', ['imageForm' => $imageForm->createView()]);
+        return $this->render("admin/imageform.html.twig", ['imageForm' => $imageForm->createView()]);
+    }
+
+    public function deleteImage(
+        $id,
+        ImageRepository $imageRepository,
+        EntityManagerInterface $entityManagerInterface
+    ) {
+        $image = $imageRepository->find($id);
+
+        $entityManagerInterface->remove($image);
+
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute('front_car_list');
+    }
+
+    public function imageList(ImageRepository $imageRepository)
+    {
+
+        $images = $imageRepository->findAll();
+
+        return $this->render("admin/images.html.twig", ['images' => $images]);
+    }
+
+    public function image_show($id, ImageRepository $imageRepository)
+    {
+        $image = $imageRepository->find($id);
+
+        return $this->render("admin/image.html.twig", ['image' => $image]);
     }
 }

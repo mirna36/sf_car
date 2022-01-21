@@ -15,19 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CarController extends AbstractController
 {
 
-    public function carList(CarRepository $carRepository)
-    {
-        $cars = $carRepository->findAll();
-
-        return $this->render("admin/cars.html.twig", ['cars' => $cars]);
-    }
-
-    public function carShow($id, CarRepository $carRepository)
-    {
-        $car = $carRepository->find($id);
-
-        return $this->render("admin/car.html.twig", ['car' => $car]);
-    }
+    
 
     public function carUpdate(
         $id,
@@ -36,16 +24,20 @@ class CarController extends AbstractController
         EntityManagerInterface $entityManagerInterface
     ) {
         $car = $carRepository->find($id);
+    
 
         $carForm = $this->createForm(CarType::class, $car);
-
+        //dd($carForm);
         $carForm->handleRequest($request);
+        //dd($carForm);
 
         if ($carForm->isSubmitted() && $carForm->isValid()) {
+            
+            
             $entityManagerInterface->persist($car);
             $entityManagerInterface->flush();
 
-            return $this->redirectToRoute('admin_car_list');
+            return $this->redirectToRoute('front_car_list');
         }
 
         return $this->render("admin/carForm.html.twig", ['carForm' => $carForm->createView()]);
@@ -61,6 +53,7 @@ class CarController extends AbstractController
         $carForm = $this->createForm(CarType::class, $car);
 
         $carForm->handleRequest($request);
+       
 
         if ($carForm->isSubmitted() && $carForm->isValid()) {
 
@@ -68,7 +61,7 @@ class CarController extends AbstractController
             $entityManagerInterface->persist($car);
             $entityManagerInterface->flush();
 
-            return $this->redirectToRoute('admin_car_list');
+            return $this->redirectToRoute('front_car_list');
         }
 
         return $this->render("admin/carForm.html.twig", ['carForm' => $carForm->createView()]);
@@ -85,6 +78,6 @@ class CarController extends AbstractController
 
         $entityManagerInterface->flush();
 
-        return $this->redirectToRoute("admin_car_list");
+        return $this->redirectToRoute("front_car_list");
     }
 }

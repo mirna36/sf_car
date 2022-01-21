@@ -19,6 +19,27 @@ class CarRepository extends ServiceEntityRepository
         parent::__construct($registry, Car::class);
     }
 
+    public function searchByTerm($term){
+        $queryBuilder = $this->createQueryBuilder('car');
+
+        $query = $queryBuilder
+        ->select('car')
+        ->leftJoin('car.brand','brand')
+        ->leftJoin('car.groupe','groupe')
+        ->Where('car.name LIKE :term')
+        ->orWhere('car.description LIKE :term')
+        ->orWhere('car.engine LIKE :term')
+        ->orWhere('brand.name LIKE :term')
+        ->orWhere('brand.countrie LIKE :term')
+        ->orWhere('groupe.name LIKE :term')
+        ->orWhere('groupe.countrie LIKE :term')
+        ->setParameter('term','%'.$term.'%')
+        ->getQuery();
+
+        return $query->getResult();
+
+    }
+
     // /**
     //  * @return Car[] Returns an array of Car objects
     //  */

@@ -30,7 +30,7 @@ class CarType extends AbstractType
                 'choice_label' => 'name'  
             ])
            
-            ->add('Soumettre', SubmitType::class);
+            ->add('enregistrer', SubmitType::class);
         
     }
 

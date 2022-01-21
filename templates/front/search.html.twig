@@ -1,0 +1,29 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <main class="container">
+        <h1>Les résultats de la recherche {{term}} sont :</h1>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {% for car in cars %}
+                <div class="col">
+  
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ asset('images/upload/' ~ car.image[0].src) }}" alt="{{ car.image[0].alt }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{car.name}}</h5>
+                            <h6 class="card-title">Year :{{car.year}}</h6>
+                            <h6 class="card-title">Brand : {{car.brand.name}}</h6>
+                            <h6 class="card-title">Group : {{car.groupe.name}}</h6>
+                            <p class="card-text">{{car.description}}</p>
+                            <a href="{{path("front_car_show", {'id' : car.id })}}" class="btn btn-primary">Voir detail</a>
+                        </div>
+                    </div>
+                </div>    
+            {% endfor %}
+        </div>    
+          
+    </main>
+    {% block javascripts %}{% endblock %}      
+
+{% endblock %}

@@ -1,23 +1,28 @@
-{% extends 'admin/base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
 {% block body %}
     {{ parent() }}
     <main class="container">
-        <h1 class="nosVoiture">Nos voitures</h1>
-       {% for car in cars %}
+        <h1 class="nosVoiture">{{car.name}}</h1>
+       
        <div class="card" style="width: 18rem;">
-            <img src="" class="card-img-top" alt="...">
+       {% for image in car.image %}
+
+		<img src="{{ asset('images/upload/' ~ image.src) }}" alt="{{ image.alt }}">
+
+	{% endfor %}
+            
             <div class="card-body">
-                <h5 class="card-title">{{car.name}}</h5>
+                 
                 <h6 class="card-title">Year :{{car.year}}</h6>
                 <h6 class="card-title">Brand : {{car.brand.name}}</h6>
                 <h6 class="card-title">Group : {{car.groupe.name}}</h6>
                 <p class="card-text">{{car.description}}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                
             </div>
         </div>
 		
-	{% endfor %}
+	
         
         
     </main>

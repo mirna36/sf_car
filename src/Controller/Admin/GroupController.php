@@ -15,19 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class GroupController extends AbstractController
 {
 
-    public function groupList(GroupRepository $groupRepository)
-    {
-        $groups = $groupRepository->findAll();
-
-        return $this->render("admin/groups.html.twig", ['groups' => $groups]);
-    }
-
-    public function groupShow($id, GroupRepository $groupRepository)
-    {
-        $group = $groupRepository->find($id);
-
-        return $this->render("admin/group.html.twig", ['group' => $group]);
-    }
+    
 
     public function groupUpdate(
         $id,
